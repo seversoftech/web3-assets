@@ -46,14 +46,14 @@ export class AlchemyDataService implements IBlockchainDataService {
         if (chainId === 250) nativeSymbol = 'FTM';
 
         try {
-            // Use Promise.allSettled to allow partial success
+            // Use Promise.allSettled to allow partial success...
             const results = await Promise.allSettled([
                 alchemy.core.getBalance(address),
                 alchemy.core.getTokenBalances(address),
                 alchemy.nft.getNftsForOwner(address),
             ]);
 
-            // Process Native Balance
+            // Process Native Balance.
             let nativeVal = '0';
             if (results[0].status === 'fulfilled') {
                 nativeVal = formatUnits(BigInt(results[0].value.toString()), 18);
